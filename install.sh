@@ -36,17 +36,11 @@ sudo apt-get -y install python3.6
 
 
 
-#sudo apt-get install gedit
+#ssh-keygen -q -t rsa -P "" -f /home/$USER_NAME/.ssh/id_rsa
+#cat /home/$USER_NAME/.ssh/id_rsa.pub >> /home/$USER_NAME/.ssh/authorized_keys
+#cat /home/$USER_NAME/.ssh/id_rsa.pub >> /home/$USER_NAME/.ssh/known_hosts
 
-
-# Setup SSH
-#ssh-keygen -q -t rsa -P "" -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null
-
-ssh-keygen -q -t rsa -P "" -f /home/$USER_NAME/.ssh/id_rsa
-cat /home/$USER_NAME/.ssh/id_rsa.pub >> /home/$USER_NAME/.ssh/authorized_keys
-cat /home/$USER_NAME/.ssh/id_rsa.pub >> /home/$USER_NAME/.ssh/known_hosts
-
-chmod 0600 /home/$USER_NAME/.ssh/authorized_keys
+#chmod 0600 /home/$USER_NAME/.ssh/authorized_keys
 
 # Verify ssh
 
@@ -77,8 +71,6 @@ sudo chmod 644 /etc/hosts
 
 #echo "`hostname -I | awk '{print $2}'`  $HOSTNAME" >>/etc/hosts
 
-
-
 # Create directory to store the MongoDB document
 sudo mkdir -p /data/db
 sudo chmod 777 -R /data
@@ -90,7 +82,7 @@ cd /home/$USER_NAME/bigdata
 pwd
 
 # Create directories for name node and data node
-sudo mkdir -p /app/bigdata
+#sudo mkdir -p /app/bigdata
 sudo chmod 777 -R /app/
 sudo chown -R $USER_NAME:$USER_NAME /app
 
@@ -263,6 +255,8 @@ rm hbase-1.6.0-bin.tar.gz
 #rm $HOME/bigdata/hbase/lib/slf4j-log4j12-1.7.25.jar 
 echo "HBase Extraction Completed "
 
+sudo chown -R $USER_NAME:$USER_NAME /app
+
 echo "******* Setting Environment Variables *****************"
 # set env variables in .bashrc file
 echo 'export JAVA_HOME=/app/bigdata/java' >>/home/$USER_NAME/.bashrc
@@ -296,6 +290,7 @@ echo 'export HBASE_HOME=/app/bigdata/hbase'>> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$HBASE_HOME/bin'>> /home/$USER_NAME/.bashrc
 echo 'export PYSPARK_PYTHON=python3.6'>> /home/$USER_NAME/.bashrc
 
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.bashrc
 source /home/$USER_NAME/.bashrc
 
 echo "******* Setting Environment Variables Done*****************"
