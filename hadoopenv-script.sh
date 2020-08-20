@@ -18,4 +18,4 @@ sudo chown -R $adminuser_name:$adminuser_name /app
 wget https://github.com/rajuchal/cloud_env_template/archive/master.zip
 unzip master.zip
 cd cloud_env_template-master/
-sh install.sh
+sh install.sh $adminuser_name
