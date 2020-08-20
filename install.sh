@@ -15,8 +15,9 @@ log()
 echo "Begin execution of installation script extension on ${HOSTNAME}"
 
 #Check the current directory
-
+USER_NAME=$1
 unzipped_dir=`pwd`
+
 
 #!/usr/bin/env bash
 # Update the index
@@ -41,16 +42,16 @@ sudo apt-get -y install python3.6
 # Setup SSH
 #ssh-keygen -q -t rsa -P "" -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null
 
-ssh-keygen -q -t rsa -P "" -f /home/$USER/.ssh/id_rsa
-cat /home/$USER/.ssh/id_rsa.pub >> /home/$USER/.ssh/authorized_keys
-cat /home/$USER/.ssh/id_rsa.pub >> /home/$USER/.ssh/known_hosts
+ssh-keygen -q -t rsa -P "" -f /home/$USER_NAME/.ssh/id_rsa
+cat /home/$USER_NAME/.ssh/id_rsa.pub >> /home/$USER_NAME/.ssh/authorized_keys
+cat /home/$USER_NAME/.ssh/id_rsa.pub >> /home/$USER_NAME/.ssh/known_hosts
 
-chmod 0600 /home/$USER/.ssh/authorized_keys
+chmod 0600 /home/$USER_NAME/.ssh/authorized_keys
 
 # Verify ssh
 
-ssh -o StrictHostKeyChecking=no $USER@localhost 'sleep 5 && exit'
-ssh -o StrictHostKeyChecking=no $USER@0.0.0.0 'sleep 5 && exit'
+ssh -o StrictHostKeyChecking=no $USER_NAME@localhost 'sleep 5 && exit'
+ssh -o StrictHostKeyChecking=no $USER_NAME@0.0.0.0 'sleep 5 && exit'
 
 
 echo "Installing MySQL Server"
@@ -81,17 +82,17 @@ sudo chmod 644 /etc/hosts
 # Create directory to store the MongoDB document
 sudo mkdir -p /data/db
 sudo chmod 777 -R /data
-sudo chown -R $USER:$USER /data
+sudo chown -R $USER_NAME:$USER_NAME /data
 
 # Create directory to store the required software
-mkdir -p /home/$USER/bigdata
-cd /home/$USER/bigdata
+mkdir -p /home/$USER_NAME/bigdata
+cd /home/$USER_NAME/bigdata
 pwd
 
 # Create directories for name node and data node
 sudo mkdir -p /app/bigdata
 sudo chmod 777 -R /app/
-sudo chown -R $USER:$USER /app
+sudo chown -R $USER_NAME:$USER_NAME /app
 
 
 mkdir -p /app/bigdata/hadoop_tmp/hdfs/namenode
@@ -264,38 +265,38 @@ echo "HBase Extraction Completed "
 
 echo "******* Setting Environment Variables *****************"
 # set env variables in .bashrc file
-echo 'export JAVA_HOME=/app/bigdata/java' >>/home/$USER/.bashrc
-echo 'export HADOOP_HOME=/app/bigdata/hadoop' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> /home/$USER/.bashrc
-echo 'export HIVE_HOME=/app/bigdata/hive' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$HIVE_HOME/bin' >> /home/$USER/.bashrc
-echo 'export PIG_HOME=/app/bigdata/pig' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$PIG_HOME/bin' >> /home/$USER/.bashrc
+echo 'export JAVA_HOME=/app/bigdata/java' >>/home/$USER_NAME/.bashrc
+echo 'export HADOOP_HOME=/app/bigdata/hadoop' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> /home/$USER_NAME/.bashrc
+echo 'export HIVE_HOME=/app/bigdata/hive' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$HIVE_HOME/bin' >> /home/$USER_NAME/.bashrc
+echo 'export PIG_HOME=/app/bigdata/pig' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$PIG_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export SCALA_HOME=/app/bigdata/scala' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$SCALA_HOME/bin' >> /home/$USER/.bashrc
-echo 'export SPARK_HOME=/app/bigdata/spark' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> /home/$USER/.bashrc
-echo 'export SBT_HOME=/app/bigdata/sbt' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$SBT_HOME/bin' >> /home/$USER/.bashrc
-echo 'export KAFKA_HOME=/app/bigdata/kafka' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$KAFKA_HOME/bin' >> /home/$USER/.bashrc
+echo 'export SCALA_HOME=/app/bigdata/scala' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$SCALA_HOME/bin' >> /home/$USER_NAME/.bashrc
+echo 'export SPARK_HOME=/app/bigdata/spark' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> /home/$USER_NAME/.bashrc
+echo 'export SBT_HOME=/app/bigdata/sbt' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$SBT_HOME/bin' >> /home/$USER_NAME/.bashrc
+echo 'export KAFKA_HOME=/app/bigdata/kafka' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$KAFKA_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export CASSANDRA_HOME=/app/bigdata/cassandra' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$CASSANDRA_HOME/bin' >> /home/$USER/.bashrc
+echo 'export CASSANDRA_HOME=/app/bigdata/cassandra' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$CASSANDRA_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export MONGODB_HOME=/app/bigdata/mongodb' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$MONGODB_HOME/bin' >> /home/$USER/.bashrc
+echo 'export MONGODB_HOME=/app/bigdata/mongodb' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$MONGODB_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export SQOOP_HOME=/app/bigdata/sqoop' >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$SQOOP_HOME/bin' >> /home/$USER/.bashrc
+echo 'export SQOOP_HOME=/app/bigdata/sqoop' >> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$SQOOP_HOME/bin' >> /home/$USER_NAME/.bashrc
 
 # set env variables for Hbase
-echo 'export HBASE_HOME=/app/bigdata/hbase'>> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$HBASE_HOME/bin'>> /home/$USER/.bashrc
-echo 'export PYSPARK_PYTHON=python3.6'>> /home/$USER/.bashrc
+echo 'export HBASE_HOME=/app/bigdata/hbase'>> /home/$USER_NAME/.bashrc
+echo 'export PATH=$PATH:$HBASE_HOME/bin'>> /home/$USER_NAME/.bashrc
+echo 'export PYSPARK_PYTHON=python3.6'>> /home/$USER_NAME/.bashrc
 
-source /home/$USER/.bashrc
+source /home/$USER_NAME/.bashrc
 
 echo "******* Setting Environment Variables Done*****************"
 
@@ -362,7 +363,7 @@ sudo cp $unzipped_dir/my.cnf /etc/mysql/my.cnf
 echo " ------------- Copy MySQL JDBC Driver files Done-----------------"
 
 # copy dataset files from host to the guest VM   
-cp  $unzipped_dir/dataset.zip /home/$USER
+cp  $unzipped_dir/dataset.zip /home/$USER_NAME
 
 
 echo " ------------- Starting Hadoop Services -----------------"
@@ -400,19 +401,19 @@ echo " ------------- Spark Services Started-----------------"
 
 echo " ------------- Running Sample MapReduce Job-----------------"
 # Create a input directory in HDFS
-/app/bigdata/hadoop/bin/hdfs dfs -mkdir -p /user/$USER/wordcount/input
+/app/bigdata/hadoop/bin/hdfs dfs -mkdir -p /user/$USER_NAME/wordcount/input
 
 # Copy a local file to the input directory
-/app/bigdata/hadoop/bin/hdfs dfs -copyFromLocal /app/bigdata/hadoop/README.txt /user/$USER/wordcount/input/
+/app/bigdata/hadoop/bin/hdfs dfs -copyFromLocal /app/bigdata/hadoop/README.txt /user/$USER_NAME/wordcount/input/
 
 # Verify that the file has been copied
-/app/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER/wordcount/input/README.txt
+/app/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER_NAME/wordcount/input/README.txt
 
 # Run the wordcount example bundled with the hadoop binaries
 /app/bigdata/hadoop/bin/hadoop jar /app/bigdata/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount wordcount/input wordcount/output
 
 # Verify the output
-/app/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER/wordcount/output/part*
+/app/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER_NAME/wordcount/output/part*
 
 #Execute a Spark Example
 echo "------------RUNNING SPARK EXAMPLE ------------------------------"
@@ -424,7 +425,7 @@ echo "------------RUNNING SPARK EXAMPLE ------------------------------"
 # Run Spark shell is running in YARN mode
 # $HOME/bigdata/spark/bin/spark-shell --master spark://master:7077
 
-cd /home/$USER
-source /home/$USER/.bashrc
+cd /home/$USER_NAME
+source /home/$USER_NAME/.bashrc
 
 echo " Your environment is ready"
