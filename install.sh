@@ -41,11 +41,11 @@ sudo apt-get -y install python3.6
 # Setup SSH
 #ssh-keygen -q -t rsa -P "" -f ~/.ssh/id_rsa <<<y 2>&1 >/dev/null
 
-ssh-keygen -q -t rsa -P "" -f ~/.ssh/id_rsa
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/known_hosts
+ssh-keygen -q -t rsa -P "" -f /home/$USER/.ssh/id_rsa
+cat /home/$USER/.ssh/id_rsa.pub >> /home/$USER/.ssh/authorized_keys
+cat /home/$USER/.ssh/id_rsa.pub >> /home/$USER/.ssh/known_hosts
 
-chmod 0600 ~/.ssh/authorized_keys
+chmod 0600 /home/$USER/.ssh/authorized_keys
 
 # Verify ssh
 
@@ -81,15 +81,17 @@ sudo chmod 644 /etc/hosts
 # Create directory to store the MongoDB document
 sudo mkdir -p /data/db
 sudo chmod 777 -R /data
+sudo chown -R $USER:$USER /data
 
 # Create directory to store the required software
-mkdir -p ~/bigdata
-cd ~/bigdata
+mkdir -p /home/$USER/bigdata
+cd /home/$USER/bigdata
 pwd
 
 # Create directories for name node and data node
 sudo mkdir -p /app/bigdata
 sudo chmod 777 -R /app/
+sudo chown -R $USER:$USER /app
 
 
 mkdir -p /app/bigdata/hadoop_tmp/hdfs/namenode
@@ -262,38 +264,38 @@ echo "HBase Extraction Completed "
 
 echo "******* Setting Environment Variables *****************"
 # set env variables in .bashrc file
-echo 'export JAVA_HOME=/app/bigdata/java' >>~/.bashrc
-echo 'export HADOOP_HOME=/app/bigdata/hadoop' >> ~/.bashrc
-echo 'export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> ~/.bashrc
-echo 'export HIVE_HOME=/app/bigdata/hive' >> ~/.bashrc
-echo 'export PATH=$PATH:$HIVE_HOME/bin' >> ~/.bashrc
-echo 'export PIG_HOME=/app/bigdata/pig' >> ~/.bashrc
-echo 'export PATH=$PATH:$PIG_HOME/bin' >> ~/.bashrc
+echo 'export JAVA_HOME=/app/bigdata/java' >>/home/$USER/.bashrc
+echo 'export HADOOP_HOME=/app/bigdata/hadoop' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> /home/$USER/.bashrc
+echo 'export HIVE_HOME=/app/bigdata/hive' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$HIVE_HOME/bin' >> /home/$USER/.bashrc
+echo 'export PIG_HOME=/app/bigdata/pig' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$PIG_HOME/bin' >> /home/$USER/.bashrc
 
-echo 'export SCALA_HOME=/app/bigdata/scala' >> ~/.bashrc
-echo 'export PATH=$PATH:$SCALA_HOME/bin' >> ~/.bashrc
-echo 'export SPARK_HOME=/app/bigdata/spark' >> ~/.bashrc
-echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> ~/.bashrc
-echo 'export SBT_HOME=/app/bigdata/sbt' >> ~/.bashrc
-echo 'export PATH=$PATH:$SBT_HOME/bin' >> ~/.bashrc
-echo 'export KAFKA_HOME=/app/bigdata/kafka' >> ~/.bashrc
-echo 'export PATH=$PATH:$KAFKA_HOME/bin' >> ~/.bashrc
+echo 'export SCALA_HOME=/app/bigdata/scala' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$SCALA_HOME/bin' >> /home/$USER/.bashrc
+echo 'export SPARK_HOME=/app/bigdata/spark' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> /home/$USER/.bashrc
+echo 'export SBT_HOME=/app/bigdata/sbt' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$SBT_HOME/bin' >> /home/$USER/.bashrc
+echo 'export KAFKA_HOME=/app/bigdata/kafka' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$KAFKA_HOME/bin' >> /home/$USER/.bashrc
 
-echo 'export CASSANDRA_HOME=/app/bigdata/cassandra' >> ~/.bashrc
-echo 'export PATH=$PATH:$CASSANDRA_HOME/bin' >> ~/.bashrc
+echo 'export CASSANDRA_HOME=/app/bigdata/cassandra' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$CASSANDRA_HOME/bin' >> /home/$USER/.bashrc
 
-echo 'export MONGODB_HOME=/app/bigdata/mongodb' >> ~/.bashrc
-echo 'export PATH=$PATH:$MONGODB_HOME/bin' >> ~/.bashrc
+echo 'export MONGODB_HOME=/app/bigdata/mongodb' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$MONGODB_HOME/bin' >> /home/$USER/.bashrc
 
-echo 'export SQOOP_HOME=/app/bigdata/sqoop' >> ~/.bashrc
-echo 'export PATH=$PATH:$SQOOP_HOME/bin' >> ~/.bashrc
+echo 'export SQOOP_HOME=/app/bigdata/sqoop' >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$SQOOP_HOME/bin' >> /home/$USER/.bashrc
 
 # set env variables for Hbase
-echo 'export HBASE_HOME=/app/bigdata/hbase'>> ~/.bashrc
-echo 'export PATH=$PATH:$HBASE_HOME/bin'>> ~/.bashrc
-echo 'export PYSPARK_PYTHON=python3.6'>> ~/.bashrc
+echo 'export HBASE_HOME=/app/bigdata/hbase'>> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$HBASE_HOME/bin'>> /home/$USER/.bashrc
+echo 'export PYSPARK_PYTHON=python3.6'>> /home/$USER/.bashrc
 
-source ~/.bashrc
+source /home/$USER/.bashrc
 
 echo "******* Setting Environment Variables Done*****************"
 
@@ -360,7 +362,7 @@ sudo cp $unzipped_dir/my.cnf /etc/mysql/my.cnf
 echo " ------------- Copy MySQL JDBC Driver files Done-----------------"
 
 # copy dataset files from host to the guest VM   
-cp  $unzipped_dir/dataset.zip ~
+cp  $unzipped_dir/dataset.zip /home/$USER
 
 
 echo " ------------- Starting Hadoop Services -----------------"
@@ -422,7 +424,7 @@ echo "------------RUNNING SPARK EXAMPLE ------------------------------"
 # Run Spark shell is running in YARN mode
 # $HOME/bigdata/spark/bin/spark-shell --master spark://master:7077
 
-cd ~
-source ~/.bashrc
+cd /home/$USER
+source /home/$USER/.bashrc
 
 echo " Your environment is ready"
