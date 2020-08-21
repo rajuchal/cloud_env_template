@@ -14,8 +14,10 @@ log()
 
 echo "Begin execution of installation script extension on ${HOSTNAME}"
 
-#Check the current directory
+#Check the current user name
 USER_NAME=$1
+
+#Check the current directory
 unzipped_dir=`pwd`
 
 
@@ -78,8 +80,9 @@ sudo chown -R $USER_NAME:$USER_NAME /data
 
 # Create directory to store the required software
 mkdir -p /home/$USER_NAME/bigdata
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
 cd /home/$USER_NAME/bigdata
-pwd
+
 
 # Create directories for name node and data node
 #sudo mkdir -p /app/bigdata
@@ -99,9 +102,9 @@ mkdir -p /app/bigdata/spark_tmp/spark
 mkdir -p /app/bigdata/hive_tmp/hive
 mkdir -p /app/bigdata/zookeeper
 
-# Setting installation HOME directory - /app/bigdata  ##############################
+# Setting installation HOME directory - /home/$USER_NAME  ##############################
 
-cd /app/bigdata
+#cd /app/bigdata
 
 # Download hadoop binaries
 echo "Dowloading Hadoop"
@@ -255,38 +258,38 @@ rm hbase-1.6.0-bin.tar.gz
 #rm $HOME/bigdata/hbase/lib/slf4j-log4j12-1.7.25.jar 
 echo "HBase Extraction Completed "
 
-sudo chown -R $USER_NAME:$USER_NAME /app
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
 
 echo "******* Setting Environment Variables *****************"
 # set env variables in .bashrc file
-echo 'export JAVA_HOME=/app/bigdata/java' >>/home/$USER_NAME/.bashrc
-echo 'export HADOOP_HOME=/app/bigdata/hadoop' >> /home/$USER_NAME/.bashrc
+echo 'export JAVA_HOME=/home/'$USER_NAME'/bigdata/java' >>/home/$USER_NAME/.bashrc
+echo 'export HADOOP_HOME=/home/'$USER_NAME'/bigdata/hadoop' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> /home/$USER_NAME/.bashrc
-echo 'export HIVE_HOME=/app/bigdata/hive' >> /home/$USER_NAME/.bashrc
+echo 'export HIVE_HOME=/home/'$USER_NAME'/bigdata/hive' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$HIVE_HOME/bin' >> /home/$USER_NAME/.bashrc
-echo 'export PIG_HOME=/app/bigdata/pig' >> /home/$USER_NAME/.bashrc
+echo 'export PIG_HOME=/home/'$USER_NAME'/bigdata/pig' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$PIG_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export SCALA_HOME=/app/bigdata/scala' >> /home/$USER_NAME/.bashrc
+echo 'export SCALA_HOME=/home/'$USER_NAME'/bigdata/scala' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$SCALA_HOME/bin' >> /home/$USER_NAME/.bashrc
-echo 'export SPARK_HOME=/app/bigdata/spark' >> /home/$USER_NAME/.bashrc
+echo 'export SPARK_HOME=/home/'$USER_NAME'/bigdata/spark' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> /home/$USER_NAME/.bashrc
-echo 'export SBT_HOME=/app/bigdata/sbt' >> /home/$USER_NAME/.bashrc
+echo 'export SBT_HOME=/home/'$USER_NAME'/bigdata/sbt' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$SBT_HOME/bin' >> /home/$USER_NAME/.bashrc
-echo 'export KAFKA_HOME=/app/bigdata/kafka' >> /home/$USER_NAME/.bashrc
+echo 'export KAFKA_HOME=/home/'$USER_NAME'/bigdata/kafka' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$KAFKA_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export CASSANDRA_HOME=/app/bigdata/cassandra' >> /home/$USER_NAME/.bashrc
+echo 'export CASSANDRA_HOME=/home/'$USER_NAME'/bigdata/cassandra' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$CASSANDRA_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export MONGODB_HOME=/app/bigdata/mongodb' >> /home/$USER_NAME/.bashrc
+echo 'export MONGODB_HOME=/home/'$USER_NAME'/bigdata/mongodb' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$MONGODB_HOME/bin' >> /home/$USER_NAME/.bashrc
 
-echo 'export SQOOP_HOME=/app/bigdata/sqoop' >> /home/$USER_NAME/.bashrc
+echo 'export SQOOP_HOME=/home/'$USER_NAME'/bigdata/sqoop' >> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$SQOOP_HOME/bin' >> /home/$USER_NAME/.bashrc
 
 # set env variables for Hbase
-echo 'export HBASE_HOME=/app/bigdata/hbase'>> /home/$USER_NAME/.bashrc
+echo 'export HBASE_HOME=/home/'$USER_NAME'/bigdata/hbase'>> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$HBASE_HOME/bin'>> /home/$USER_NAME/.bashrc
 echo 'export PYSPARK_PYTHON=python3.6'>> /home/$USER_NAME/.bashrc
 
@@ -299,120 +302,126 @@ echo "******* Setting Environment Variables Done*****************"
 echo " ------------- Copy Hadoop configuraton files -----------------"
 
 # Add JAVA_HOME in hadoop-env.sh
-echo 'export JAVA_HOME=/app/bigdata/java' >> /app/bigdata/hadoop/etc/hadoop/hadoop-env.sh
+echo 'export JAVA_HOME=/home/'$USER_NAME'/bigdata/java' >> /home/$USER_NAME/bigdata/hadoop/etc/hadoop/hadoop-env.sh
 
 # copy hadoop configuraton files from host to the guest VM
 #By default, Vagrant will share your project directory (the directory with the Vagrantfile) to /vagrant
 
 # cd $HOME/hadoop_light_cloud
 
-cp $unzipped_dir/core-site.xml /app/bigdata/hadoop/etc/hadoop/
-cp $unzipped_dir/hdfs-site.xml /app/bigdata/hadoop/etc/hadoop/
-cp $unzipped_dir/mapred-site.xml /app/bigdata/hadoop/etc/hadoop/
-cp $unzipped_dir/yarn-site.xml /app/bigdata/hadoop/etc/hadoop/
-cp $unzipped_dir/masters /app/bigdata/hadoop/etc/hadoop/
-cp $unzipped_dir/slaves /app/bigdata/hadoop/etc/hadoop/
+cp $unzipped_dir/core-site.xml /home/$USER_NAME/bigdata/hadoop/etc/hadoop/
+cp $unzipped_dir/hdfs-site.xml /home/$USER_NAME/bigdata/hadoop/etc/hadoop/
+cp $unzipped_dir/mapred-site.xml /home/$USER_NAME/bigdata/hadoop/etc/hadoop/
+cp $unzipped_dir/yarn-site.xml /home/$USER_NAME/bigdata/hadoop/etc/hadoop/
+cp $unzipped_dir/masters /home/$USER_NAME/bigdata/hadoop/etc/hadoop/
+cp $unzipped_dir/slaves /home/$USER_NAME/bigdata/hadoop/etc/hadoop/
 
 echo " ------------- Copy Hadoop configuraton files Done-----------------"
 
 echo " ------------- Copy Hive configuraton files -----------------"
 
-cp $unzipped_dir/hive-site.xml /app/bigdata/hive/conf/
-cp $unzipped_dir/hive-env.sh /app/bigdata/hive/conf/
-cp $unzipped_dir/hive-config.sh /app/bigdata/hive/bin/
+cp $unzipped_dir/hive-site.xml /home/$USER_NAME/bigdata/hive/conf/
+cp $unzipped_dir/hive-env.sh /home/$USER_NAME/bigdata/hive/conf/
+cp $unzipped_dir/hive-config.sh /home/$USER_NAME/bigdata/hive/bin/
 echo " ------------- Copy Hive configuraton files Done-----------------"
 
 echo " ------------- Copy Spark configuraton files -----------------"
 
 # copy Spark configuraton files from host to the guest VM
-cp $unzipped_dir/slaves /app/bigdata/spark/conf/
-cp $unzipped_dir/spark-env.sh /app/bigdata/spark/conf/
-cp $unzipped_dir/spark-defaults.conf /app/bigdata/spark/conf/
-cp $unzipped_dir/hive-site.xml /app/bigdata/spark/conf/
+cp $unzipped_dir/slaves /home/$USER_NAME/bigdata/spark/conf/
+cp $unzipped_dir/spark-env.sh /home/$USER_NAME/bigdata/spark/conf/
+cp $unzipped_dir/spark-defaults.conf /home/$USER_NAME/bigdata/spark/conf/
+cp $unzipped_dir/hive-site.xml /home/$USER_NAME/bigdata/spark/conf/
 echo " ------------- Copy Spark configuraton files Done-----------------"
 
 # copy Hive configuraton file into Sqoop conf directory
-cp $unzipped_dir/hive-site.xml /app/bigdata/sqoop/conf/
+cp $unzipped_dir/hive-site.xml /home/$USER_NAME/bigdata/sqoop/conf/
 
 echo " ------------- Copy HBase configuraton files -----------------"
 #HBase related configuration file
-cp  $unzipped_dir/hbase-site.xml /app/bigdata/hbase/conf/
-cp  $unzipped_dir/hbase-env.sh /app/bigdata/hbase/conf/
+cp  $unzipped_dir/hbase-site.xml /home/$USER_NAME/bigdata/hbase/conf/
+cp  $unzipped_dir/hbase-env.sh /home/$USER_NAME/bigdata/hbase/conf/
 
 # copy regionservers file from host to the guest VM  
 #cp /vagrant/config/hbase/regionservers /home/vagrant/bigdata/hbase/conf/
-echo 'localhost' >/app/bigdata/hbase/conf/regionservers
+echo 'localhost' >/home/$USER_NAME/bigdata/hbase/conf/regionservers
 
 echo " ------------- Copy HBase configuraton files Done-----------------"
 
 echo " ------------- Copy MySQL JDBC Driver files -----------------"
  
 #Copy  MySQL JDBC Driver to Hive Directory
-cp /app/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /app/bigdata/hive/lib/
-cp /app/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /app/bigdata/sqoop/lib/
-cp /app/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /app/bigdata/spark/jars/
-cp /app/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /app/bigdata/kafka/libs/
+cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /home/$USER_NAME/bigdata/hive/lib/
+cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /home/$USER_NAME/bigdata/sqoop/lib/
+cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /home/$USER_NAME/bigdata/spark/jars/
+cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /home/$USER_NAME/bigdata/kafka/libs/
 
 sudo cp $unzipped_dir/my.cnf /etc/mysql/my.cnf	
 
 echo " ------------- Copy MySQL JDBC Driver files Done-----------------"
 
 # copy dataset files from host to the guest VM   
-cp  $unzipped_dir/dataset.zip /home/$USER_NAME
+cp  $unzipped_dir/dataset.zip /home/$USER_NAME/
 
+#=============================================================================
+
+sudo chown -R $USER_NAME:$USER_NAME /app
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
+
+#==============================================================================
 
 echo " ------------- Starting Hadoop Services -----------------"
 # Format namenode
-/app/bigdata/hadoop/bin/hadoop namenode -format
+/home/$USER_NAME/bigdata/hadoop/bin/hadoop namenode -format
 
 # Start dfs
-/app/bigdata/hadoop/sbin/start-dfs.sh
+/home/$USER_NAME/bigdata/hadoop/sbin/start-dfs.sh
 #Check if namenode, datanode and secondary namenode has started
-/app/bigdata/java/bin/jps
+/home/$USER_NAME/bigdata/java/bin/jps
 
 # Start yarn
-/app/bigdata/hadoop/sbin/start-yarn.sh
+/home/$USER_NAME/bigdata/hadoop/sbin/start-yarn.sh
 #Check if resource manager & node manager has started
-/app/bigdata/java/bin/jps
+/home/$USER_NAME/bigdata/java/bin/jps
 
 echo " ------------- Hadoop Services Started-----------------"
 
 # Initialize MySQL for Hive 2
 echo "Creating Metastore db for Hive "
-/app/bigdata/hive/bin/hive --service schemaTool -dbType mysql -initSchema
+/home/$USER_NAME/bigdata/hive/bin/hive --service schemaTool -dbType mysql -initSchema
 echo "Metastore db creation for Hive completed "
 
 echo " ------------- Starting Spark Services -----------------"
 
 # Start Spark Master
-/app/bigdata/spark/sbin/start-master.sh
+/home/$USER_NAME/bigdata/spark/sbin/start-master.sh
 # Start Spark Slaves
-/app/bigdata/spark/sbin/start-slaves.sh
+/home/$USER_NAME/bigdata/spark/sbin/start-slaves.sh
 
 #Check if Hadoop Services and Spark Services started 
-/app/bigdata/java/bin/jps
+/home/$USER_NAME/bigdata/java/bin/jps
 
 echo " ------------- Spark Services Started-----------------"
 
 echo " ------------- Running Sample MapReduce Job-----------------"
 # Create a input directory in HDFS
-/app/bigdata/hadoop/bin/hdfs dfs -mkdir -p /user/$USER_NAME/wordcount/input
+/home/$USER_NAME/bigdata/hadoop/bin/hdfs dfs -mkdir -p /user/$USER_NAME/wordcount/input
 
 # Copy a local file to the input directory
-/app/bigdata/hadoop/bin/hdfs dfs -copyFromLocal /app/bigdata/hadoop/README.txt /user/$USER_NAME/wordcount/input/
+/home/$USER_NAME/bigdata/hadoop/bin/hdfs dfs -copyFromLocal /home/$USER_NAME/bigdata/hadoop/README.txt /user/$USER_NAME/wordcount/input/
 
 # Verify that the file has been copied
-/app/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER_NAME/wordcount/input/README.txt
+/home/$USER_NAME/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER_NAME/wordcount/input/README.txt
 
 # Run the wordcount example bundled with the hadoop binaries
-/app/bigdata/hadoop/bin/hadoop jar /app/bigdata/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount wordcount/input wordcount/output
+/home/$USER_NAME/bigdata/hadoop/bin/hadoop jar /home/$USER_NAME/bigdata/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount wordcount/input wordcount/output
 
 # Verify the output
-/app/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER_NAME/wordcount/output/part*
+/home/$USER_NAME/bigdata/hadoop/bin/hdfs dfs -cat /user/$USER_NAME/wordcount/output/part*
 
 #Execute a Spark Example
 echo "------------RUNNING SPARK EXAMPLE ------------------------------"
-/app/bigdata/spark/bin/run-example SparkPi 10
+/home/$USER_NAME/bigdata/spark/bin/run-example SparkPi 10
 
 # Check whether the Spark shell is running in local mode
 #$HOME/bigdata/spark/bin/spark-shell --master local[*]
