@@ -356,7 +356,11 @@ cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /hom
 cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /home/$USER_NAME/bigdata/spark/jars/
 cp /home/$USER_NAME/bigdata/mysql-connector/mysql-connector-java-5.1.47.jar /home/$USER_NAME/bigdata/kafka/libs/
 
-sudo cp $unzipped_dir/my.cnf /etc/mysql/my.cnf	
+#sudo cp $unzipped_dir/my.cnf /etc/mysql/my.cnf	
+#sudo cp $unzipped_dir/my.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
+
+#sudo /etc/init.d/mysql restart
+
 
 echo " ------------- Copy MySQL JDBC Driver files Done-----------------"
 
@@ -375,17 +379,16 @@ sudo chmod 777 -R /home/$USER_NAME/bigdata
 #==============================================================================
 
 sudo su $USER_NAME
+cd ~
 
 rm -f ~/.ssh/id_rsa
 ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-ssh localhost
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/known_hosts
+chmod 0600 ~/.ssh/authorized_keys
 
-#------------------------------------------------------------------------------
-
-# Initialize MySQL for Hive 2
-echo "Creating Metastore db for Hive "
-/home/$USER_NAME/bigdata/hive/bin/hive --service schemaTool -dbType mysql -initSchema
-echo "Metastore db creation for Hive completed "
+ssh -o StrictHostKeyChecking=no $USER_NAME@localhost 'sleep 5 && exit'
+ssh -o StrictHostKeyChecking=no $USER_NAME@0.0.0.0 'sleep 5 && exit'
+#ssh localhost
 
 #===============================================================
 echo " ------------- Starting Hadoop Services -----------------"
@@ -398,7 +401,7 @@ sudo chown -R $USER_NAME:$USER_NAME /app
 sudo chmod 777 -R /app/
 
 sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
-sudo chmod 777 -R /home/$USER_NAME/bigdata
+#sudo chmod 777 -R /home/$USER_NAME/bigdata
 #---------------------------------------------------------------------
 
 
@@ -413,6 +416,14 @@ sudo chmod 777 -R /home/$USER_NAME/bigdata
 /home/$USER_NAME/bigdata/java/bin/jps
 
 echo " ------------- Hadoop Services Started-----------------"
+
+#------------------------------------------------------------------------------
+
+# Initialize MySQL for Hive 2
+echo "Creating Metastore db for Hive "
+/home/$USER_NAME/bigdata/hive/bin/hive --service schemaTool -dbType mysql -initSchema
+echo "Metastore db creation for Hive completed "
+#--------------------------------------------------------------------
 
 echo " ------------- Starting Spark Services -----------------"
 
@@ -456,7 +467,6 @@ sudo chown -R $USER_NAME:$USER_NAME /app
 sudo chmod 777 -R /app/
 
 sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
-sudo chmod 777 -R /home/$USER_NAME/bigdata
 
 cd /home/$USER_NAME
 source /home/$USER_NAME/.bashrc
