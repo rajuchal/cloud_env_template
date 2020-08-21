@@ -20,9 +20,9 @@ ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/a
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/known_hosts
 chmod 0600 ~/.ssh/authorized_keys
 
-ssh -o StrictHostKeyChecking=no $USER_NAME@localhost 'sleep 5 && exit'
-ssh -o StrictHostKeyChecking=no $USER_NAME@0.0.0.0 'sleep 5 && exit'
-echo "Sample Outpout ">>t5.dat
+ssh -o StrictHostKeyChecking=no $adminuser_name@localhost 'sleep 5 && exit'
+ssh -o StrictHostKeyChecking=no $adminuser_name@0.0.0.0 'sleep 5 && exit'
+echo `pwd`>>t5.dat
 ##==========================================================================
 # Creating Installation directory 
 sudo mkdir -p /app/bigdata
