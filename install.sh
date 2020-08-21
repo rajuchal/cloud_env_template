@@ -360,19 +360,47 @@ sudo cp $unzipped_dir/my.cnf /etc/mysql/my.cnf
 
 echo " ------------- Copy MySQL JDBC Driver files Done-----------------"
 
+#---------------------------------------------------------------------------
 # copy dataset files from host to the guest VM   
 cp  $unzipped_dir/dataset.zip /home/$USER_NAME/
 
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/dataset.zip
 #=============================================================================
 
 sudo chown -R $USER_NAME:$USER_NAME /app
-sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
+sudo chmod 777 -R /app/
 
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
+sudo chmod 777 -R /home/$USER_NAME/bigdata
 #==============================================================================
 
+sudo su $USER_NAME
+
+rm -f ~/.ssh/id_rsa
+ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+ssh localhost
+
+#------------------------------------------------------------------------------
+
+# Initialize MySQL for Hive 2
+echo "Creating Metastore db for Hive "
+/home/$USER_NAME/bigdata/hive/bin/hive --service schemaTool -dbType mysql -initSchema
+echo "Metastore db creation for Hive completed "
+
+#===============================================================
 echo " ------------- Starting Hadoop Services -----------------"
 # Format namenode
 /home/$USER_NAME/bigdata/hadoop/bin/hadoop namenode -format
+
+#---------------------------------------------------------------------
+
+sudo chown -R $USER_NAME:$USER_NAME /app
+sudo chmod 777 -R /app/
+
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
+sudo chmod 777 -R /home/$USER_NAME/bigdata
+#---------------------------------------------------------------------
+
 
 # Start dfs
 /home/$USER_NAME/bigdata/hadoop/sbin/start-dfs.sh
@@ -385,11 +413,6 @@ echo " ------------- Starting Hadoop Services -----------------"
 /home/$USER_NAME/bigdata/java/bin/jps
 
 echo " ------------- Hadoop Services Started-----------------"
-
-# Initialize MySQL for Hive 2
-echo "Creating Metastore db for Hive "
-/home/$USER_NAME/bigdata/hive/bin/hive --service schemaTool -dbType mysql -initSchema
-echo "Metastore db creation for Hive completed "
 
 echo " ------------- Starting Spark Services -----------------"
 
@@ -428,6 +451,12 @@ echo "------------RUNNING SPARK EXAMPLE ------------------------------"
 
 # Run Spark shell is running in YARN mode
 # $HOME/bigdata/spark/bin/spark-shell --master spark://master:7077
+
+sudo chown -R $USER_NAME:$USER_NAME /app
+sudo chmod 777 -R /app/
+
+sudo chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/bigdata
+sudo chmod 777 -R /home/$USER_NAME/bigdata
 
 cd /home/$USER_NAME
 source /home/$USER_NAME/.bashrc
