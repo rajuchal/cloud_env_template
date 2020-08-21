@@ -10,8 +10,8 @@ ssh-keygen -q -t rsa -N '' -f /home/$adminuser_name/.ssh/id_rsa
 cat /home/$adminuser_name/.ssh/id_rsa.pub >> /home/$adminuser_name/.ssh/authorized_keys
 cat /home/$adminuser_name/.ssh/id_rsa.pub >> /home/$adminuser_name/.ssh/known_hosts
 sudo chown -R $adminuser_name:$adminuser_name /home/$adminuser_name/.ssh
-ssh -o StrictHostKeyChecking=no $adminuser_name@localhost 'sleep 5 && exit'
-ssh -o StrictHostKeyChecking=no $adminuser_name@0.0.0.0 'sleep 5 && exit'
+echo 'sleep 2 && exit'|ssh -o StrictHostKeyChecking=no $adminuser_name@localhost
+echo 'sleep 2 && exit'|ssh -o StrictHostKeyChecking=no $adminuser_name@0.0.0.0
 echo `pwd`>>t5.dat
 # ====================================================================
 
