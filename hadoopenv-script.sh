@@ -27,8 +27,10 @@ echo `pwd`>>t5.dat
 	echo "spark ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
 	
 	sudo su - spark
-	rm -f ~/.ssh/id_rsa
-	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+	cd /home/spark
+	rm -f /home/spark/.ssh/id_rsa
+	ssh-keygen -q -t rsa -N '' -f /home/spark/.ssh/id_rsa && cat /home/spark/.ssh/id_rsa.pub >> /home/spark/.ssh/authorized_keys
+	cat /home/spark/.ssh/id_rsa.pub >> /home/spark/.ssh/known_hosts
 
 	ssh localhost
   echo `pwd`>>t4.dat
