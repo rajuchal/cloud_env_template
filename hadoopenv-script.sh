@@ -3,7 +3,7 @@ sudo apt-get install -y update
 sudo apt install -y unzip
 ##==========================================================================
 # Passwordless ssh login 
-sudo su $adminuser_name
+sudo su - $adminuser_name
 cd /home/$adminuser_name
 rm -f /home/$adminuser_name/.ssh/id_rsa
 ssh-keygen -q -t rsa -N '' -f /home/$adminuser_name/.ssh/id_rsa
@@ -26,7 +26,7 @@ echo `pwd`>>t5.dat
 
 	echo "spark ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
 	
-	sudo su spark
+	sudo su - spark
 	rm -f ~/.ssh/id_rsa
 	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
