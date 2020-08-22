@@ -14,11 +14,28 @@ echo 'sleep 2 && exit'|ssh -o StrictHostKeyChecking=no $adminuser_name@localhost
 echo 'sleep 2 && exit'|ssh -o StrictHostKeyChecking=no $adminuser_name@0.0.0.0
 echo `pwd`>>t5.dat
 # ====================================================================
+#	Third create a spark user with proper privileges and ssh keys.
 
+	sudo addgroup spark
+	sudo useradd -m -g spark spark
+	sudo adduser spark sudo
+	sudo mkdir /home/spark
+	sudo chown spark:spark /home/spark
+
+#	Add to sudoers file:
+
+	echo "spark ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
+	
+	sudo su spark
+	rm -f ~/.ssh/id_rsa
+	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+	ssh localhost
+  echo `pwd`>>t4.dat
 ##==========================================================================
 # Creating Installation directory 
 sudo mkdir -p /app/bigdata
-sudo chown -R $adminuser_name:$adminuser_name /app
+sudo chown -R spark:spark /app
 
 #wget https://github.com/rajuchal/cloud_env_template/archive/master.zip
 #unzip master.zip
