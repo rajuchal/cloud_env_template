@@ -66,7 +66,7 @@ HIVE_CONF_DIR="${HIVE_CONF_DIR:-$HIVE_HOME/conf}"
 export HIVE_CONF_DIR=$HIVE_CONF_DIR
 export HIVE_AUX_JARS_PATH=$HIVE_AUX_JARS_PATH
 
-export HADOOP_HOME=$HOME/bigdata/hadoop
+export HADOOP_HOME=/app/bigdata/hadoop
 
 # Default to use 256MB 
 export HADOOP_HEAPSIZE=${HADOOP_HEAPSIZE:-256}
