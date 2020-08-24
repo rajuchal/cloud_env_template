@@ -40,7 +40,7 @@
 # By default hive shell scripts use a heap size of 256 (MB).  Larger heap size would also be 
 # appropriate for hive server.
 # Set HADOOP_HOME to point to a specific hadoop install directory
-#HADOOP_HOME=$HOME/bigdata/hadoop
+# HADOOP_HOME=/app/bigdata/hadoop
 #export PATH=$PATH:$HADOOP_HOME
 # Hive Configuration Directory can be controlled by:
 # export HIVE_CONF_DIR=
