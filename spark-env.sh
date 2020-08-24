@@ -45,8 +45,8 @@
 # - SPARK_IDENT_STRING  A string representing this instance of spark. (Default: $USER)
 # - SPARK_NICENESS      The scheduling priority for daemons. (Default: 0)
 
-export JAVA_HOME=$HOME/bigdata/java
-export HADOOP_HOME=$HOME/bigdata/hadoop
+export JAVA_HOME=/app/bigdata/java
+export HADOOP_HOME=/app/bigdata/hadoop
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export LOCAL_DIR=/app/bigdata/spark_tmp/spark
 export SPARK_MASTER_HOST=localhost
