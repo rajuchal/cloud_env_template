@@ -45,14 +45,18 @@ echo `pwd`>>t5.dat
 	sudo addgroup spark
 	sudo useradd -m -g spark spark
 	sudo adduser spark sudo
-	sudo chown spark:spark /home/spark
+	sudo chown -R spark:spark /home/spark
 
 #	Add to sudoers file:
 
 	echo "spark ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
 	
 	sudo su spark
+	echo "'Now' `pwd`"
 	cd /home/spark
+	mkdir /home/spark/.ssh
+	sudo chown -R spark:spark /home/spark/.ssh
+	chmod 777 /home/spark/.ssh
 	rm -f /home/spark/.ssh/id_rsa
 	ssh-keygen -q -t rsa -N '' -f /home/spark/.ssh/id_rsa && cat /home/spark/.ssh/id_rsa.pub >> /home/spark/.ssh/authorized_keys
   	chmod 0600 /home/spark/.ssh/authorized_keys
