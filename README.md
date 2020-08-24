@@ -5,18 +5,18 @@ Template & Automation Script for creating single node hadoop/spark/kafka/cassand
 # Installation Guide
 
 DOWNLOAD THE POWER SHELL SCRIPT
-===============================
+-------------------------------
 
-PS /home/<USER NAME>/testscript> wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/create-single-env.ps1
+PS /home/USER_NAME/testscript> wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/create-single-env.ps1
 
 DOWNLOAD THE ARM TEMPLATE FILE
-===============================
-PS /home/<USER NAME>/testscript> wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/single-env-template.json
+-------------------------------
+PS /home/USER_NAME/testscript> wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/single-env-template.json
 
-PS /home/<USER NAME>/testscript> dir
+PS /home/USER_NAME/testscript> dir
 
 
-Directory: /home/<USER NAME>/testscript
+Directory: /home/USER_NAME/testscript
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -24,7 +24,7 @@ Mode                 LastWriteTime         Length Name
 -----           8/24/2020 11:57 AM         312983 single-env-template.json
 
 
-Template Location - /home/<USER NAME>/testscript/single-env-template.json
+Template Location - /home/USER_NAME/testscript/single-env-template.json
 
 
 RUN THE SCRIPT
@@ -47,25 +47,25 @@ IP Address for Linux VM - 10.1.2.4
 Use same User Name & Password of Windows for Linux VM Log-in 
 
 Start Hadoop Services in Linux VM
-=================================
+----------------------------------
 $ start-dfs.sh
 $ start-yarn.sh
 
 Start Spark Services in Linux VM
-=================================
+----------------------------------
 $ start-master.sh
 $ start-slaves.sh
 
 Start Spark(Scala/Java) Shell  in Linux VM
-============================================
+--------------------------------------------
 $ spark-shell --master spark://localhost:7077
 
 Start Spark(Python) Shell  in Linux VM
-============================================
+------------------------------------------
 $ pyspark --master spark://localhost:7077
 
 Start Hive  in Linux VM
-============================================
+----------------------------------------------
 $ hive
 
 
