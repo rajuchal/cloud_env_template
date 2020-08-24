@@ -727,7 +727,7 @@
           "fileUris": [
             "[concat(parameters('scriptLocation'), 'windowstools.ps1')]"
           ],
-          "commandToExecute": "powershell.exe windowstools.ps1"
+          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File ./windowstools.ps1"
         }
       }
     }
