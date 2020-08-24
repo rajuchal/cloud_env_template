@@ -709,7 +709,7 @@
       }
     },
 	
-	{
+  {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('virtualMachines_lkm_dna_Win_VM_name'),'/installWinTools')]",
       "apiVersion": "2019-07-01",
@@ -719,9 +719,9 @@
 		"[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaces_lkm_dna_win_vm347_name'))]"
       ],
       "properties": {
-        "publisher": "Microsoft.Azure.Extensions",
-        "type": "CustomScript",
-        "typeHandlerVersion": "2.0",
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.10",
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
