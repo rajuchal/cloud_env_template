@@ -52,6 +52,7 @@ echo `pwd`>>t5.dat
 	echo "spark ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
 	
 	sudo su spark
+	echo "Now --------------------$USER"
 	echo "'Now' `pwd`"
 	cd /home/spark
 	mkdir /home/spark/.ssh
