@@ -707,6 +707,29 @@
           "commandToExecute": "[concat('sh hadoopenv-script.sh ',parameters('adminUsername'))]"
         }
       }
+    },
+	
+	{
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('virtualMachines_lkm_dna_Win_VM_name'),'/installWinTools')]",
+      "apiVersion": "2019-07-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachines_lkm_dna_Win_VM_name'))]",
+		"[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaces_lkm_dna_win_vm347_name'))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "[concat(parameters('scriptLocation'), 'windowstools.ps1')]"
+          ],
+          "commandToExecute": "powershell.exe windowstools.ps1"
+        }
+      }
     }
     ],
     "outputs": {
