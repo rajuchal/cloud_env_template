@@ -25,7 +25,7 @@
 
 # The java implementation to use.  Java 1.7+ required.
 # export JAVA_HOME=/usr/java/jdk1.6.0/
-export JAVA_HOME=$HOME/bigdata/java
+export JAVA_HOME=/app/bigdata/java
 
 # Extra Java CLASSPATH elements.  Optional.
 # export HBASE_CLASSPATH=
