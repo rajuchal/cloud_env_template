@@ -1,7 +1,7 @@
 ##  Azure Resource Manager(ARM) Template & Automation Script for 
-###  Single Node Hadoop/Spark/HBase/Kafka/Cassandra/MongoDB Cluster with Windows VM Gateway
+###  Single Node _Hadoop/Spark/HBase/Kafka/Cassandra/MongoDB_ Cluster with Windows VM Gateway
 
-Template & Automation Script for creating single node hadoop/spark/kafka/cassanda/mongodb cluster in Azure
+Template & Automation Script for creating single node _hadoop/spark/kafka/cassanda/mongodb_ cluster in Azure
 
 ### Note :- To run this script you should have proper Rights & Permissions to create resources in Azure 
 
