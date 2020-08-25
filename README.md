@@ -9,7 +9,7 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
 
 **Client Desktop/Laptop --> RDP Connection --> Azure Windows VM --> SSH Connection --> Azure Linux VM**
 
-## Fucntions of the template & script -
+## Functions of the template & script -
 1. Create single instance Windows VM for Client log-in using RDP connection
 2. Download SSH clients into Windows VM
 3. Create single instance Linux VM for Client log-in using SSH connection from Windows VM
