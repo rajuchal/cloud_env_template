@@ -20,14 +20,14 @@ Template & Automation Script for creating single node hadoop/spark/kafka/cassand
 2. Open Power Shell in Aazure Portal
 3. Download the Power shell script 
 
-    PS /home/USER_NAME/testscript> #####wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/create-single-env.ps1**
+    ##### wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/create-single-env.ps1
 
 4. Download the ARM template file
 
-    PS /home/USER_NAME/testscript> #####wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/single-env-template.json**
-    PS /home/USER_NAME/testscript> #####dir
+    ##### wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/single-env-template.json
+    ##### dir
 
-#####Example
+##### Example
 
 Directory: /home/USER_NAME/testscript
 
@@ -41,7 +41,7 @@ Template Location - /home/USER_NAME/testscript/single-env-template.json
 
 5. Run the Power shell script
 
-####PS /home/<USER NAME>/testscript>./create-single-env.ps1####
+##### PS/home/USER_NAME/testscript>./create-single-env.ps1
 
 Enter the same project name: lkm_dna_env
 Enter the administrator User name: azureuser
