@@ -27,26 +27,16 @@ Template & Automation Script for creating single node hadoop/spark/kafka/cassand
     ##### wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/single-env-template.json
     ##### dir
 
-##### Example
-
-Directory: /home/USER_NAME/testscript
-
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
------           8/24/2020 11:56 AM          82309 create-single-env.ps1
------           8/24/2020 11:57 AM         312983 single-env-template.json
-
-
-Template Location - /home/USER_NAME/testscript/single-env-template.json
+    ##### Example
+    ##### Check the template file "single-env-template.json" location
 
 5. Run the Power shell script
 
 ##### PS/home/USER_NAME/testscript>./create-single-env.ps1
-
-Enter the same project name: lkm_dna_env
-Enter the administrator User name: azureuser
-Enter the administrator password: *************
-Enter the full path of template file location: /home/<USER NAME>/testscript/single-env-template.json
+    _Enter the same project name: lkm_dna_env
+    _Enter the administrator User name: azureuser
+    _Enter the administrator password: *************
+    _Enter the full path of template file location: /home/USER_NAME/testscript/single-env-template.json
 
 6. After script execution completed, Connect Windows VM using RDP
 7. Check the location "C:\windowsTools" for Windows Tools (SSH Clients & Browser)
