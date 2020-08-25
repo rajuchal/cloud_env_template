@@ -15,11 +15,9 @@ Template & Automation Script for creating single node hadoop/spark/kafka/cassand
 
 ## Installation Guide
 
-1. Open Azure Portal  
+1.Open Azure Portal   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/)
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/)
-
-2. Open Power Shell in Aazure Portal
+2.Open Power Shell in Aazure Portal
 3. Download the Power shell script 
 
     PS /home/USER_NAME/testscript> **wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/create-single-env.ps1**
