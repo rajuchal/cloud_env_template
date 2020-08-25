@@ -3,6 +3,8 @@
 
 Template & Automation Script for creating single node hadoop/spark/kafka/cassanda/mongodb cluster in Azure
 
+### Note :- To run this script you should have proper Rights & Permissions to create resources in Azure 
+
 ## Connection architecture
 
 **Client Desktop/Laptop --> RDP Connection --> Azure Windows VM --> SSH Connection --> Azure Linux VM**
@@ -65,6 +67,6 @@ Template & Automation Script for creating single node hadoop/spark/kafka/cassand
     ##### $ hive
 
 
-**_Happy Clustering in Azure_**
+:+1: **_Happy Clustering in Azure_** :shipit:
 
 
