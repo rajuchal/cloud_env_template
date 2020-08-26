@@ -1,4 +1,4 @@
-$projectName = Read-Host -Prompt "Enter the same project name"
+$projectName = Read-Host -Prompt "Enter some project/resource group name"
 $adminUsername = Read-Host -Prompt "Enter the administrator User name"
 $adminPassword = Read-Host -Prompt "Enter the administrator password" -AsSecureString
 $templateFile = Read-Host -Prompt "Enter the full path of template file location"
