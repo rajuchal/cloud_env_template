@@ -14,9 +14,6 @@
     "windowsOSVersion": {
       "value": "2012-R2-Datacenter"
     },
-	"ubuntuLinuxOSVersion": {
-      "value": "18.04-LTS"
-    },
     "linuxVMSize": {
       "value": "Standard_D2s_v3"
     },
