@@ -22,7 +22,7 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
 2. Open Power Shell in Aazure Portal
 3. Download the Power shell script 
 
-    #### https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/template-script/create-single-env.ps1
+    #### wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/template-script/create-single-env.ps1
 
 4. Download the ARM template & Parameter file
 
