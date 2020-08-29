@@ -1,4 +1,4 @@
-##  Azure Resource Manager(ARM) Template & Automation Script for 
+##  Azure Resource Manager(ARM) Template & Automation Script for Single user environment
 ###  Single Node _Hadoop/Spark/HBase/Kafka/Cassandra/MongoDB_ Cluster with Windows VM Gateway
 
 Template & Automation Script for creating single node _hadoop/spark/kafka/cassanda/mongodb_ cluster in Azure
@@ -40,9 +40,9 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
     
         **EXAMPLE**
         Enter the same project name: lkm_dna_env
-        Enter the administrator User name: azureuser
-        Enter the administrator password: *************
-        Enter the full path of template file location: /home/USER_NAME/testscript/single-env-template.json
+        Enter the full path of template file location: ./singleuser-env-template.json
+        Enter the full path of parameter file location: ./singleuser.parameters.json
+        
 
 6. After script execution completed, Connect Windows VM using RDP
 7. Check the location "C:\windowsTools" for Windows Tools (SSH Clients & Browser)
