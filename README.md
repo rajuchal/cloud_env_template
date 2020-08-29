@@ -22,18 +22,23 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
 2. Open Power Shell in Aazure Portal
 3. Download the Power shell script 
 
-    ##### wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/create-single-env.ps1
+    #### https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/template-script/create-single-env.ps1
 
-4. Download the ARM template file
+4. Download the ARM template & Parameter file
 
-    ##### wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/single-env-template.json
-    ##### dir
+    #### wget  https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/template-script/singleuser-env-template.json
+    
+    #### wget https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/template-script/singleuser.parameters.json
+    #### dir
 
     ##### Check the template file "single-env-template.json" location
+    ##### Check the parameter file "singleuser.parameters.json" location
 
 5. Run the Power shell script
 
-    ##### PS/home/USER_NAME/testscript>./create-single-env.ps1
+    ##### PS/home/USER_NAME>./create-single-env.ps1
+    
+        **EXAMPLE**
         Enter the same project name: lkm_dna_env
         Enter the administrator User name: azureuser
         Enter the administrator password: *************
@@ -66,6 +71,10 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
 
     ##### $ hive
 
+### Note-
+#### Installation directory in Linux VM - /app/bigdata
+#### Default user name for Windows & Linux VM - azureuser
+#### Default password for Windows & Linux VM - Password@1234
 
 :+1: **_Happy Clustering in Azure_** :shipit:
 
