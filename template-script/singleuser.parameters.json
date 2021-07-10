@@ -21,7 +21,7 @@
       "value": "Standard_D2s_v3"
     },
     "scriptLocation": {
-      "value": "https://raw.githubusercontent.com/rajuchal/multiuser_env_template/master/"
+      "value": "https://raw.githubusercontent.com/rajuchal/cloud_env_template/master/"
     }
   }
 }
