@@ -42,7 +42,12 @@ sudo apt-get -y install unzip
 sudo apt-get -y install python
 sudo apt-get -y install python3.6
 
-
+#Installing Python 3.7
+sudo apt -y install software-properties-common
+sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt -y update
+sudo apt -y install python3.7
+echo " Python 3.7 installation complete "
 
 #sudo apt-get install gedit
 
@@ -115,15 +120,14 @@ cd /app/bigdata
 
 # Download hadoop binaries
 echo "Dowloading Hadoop"
-wget  -q https://downloads.apache.org/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
+wget  -q https://downloads.apache.org/hadoop/common/stable2/hadoop-2.10.1.tar.gz
 
 # Download Spark pre-built with hadoop 2.7+
 echo "Dowloading Spark"
-wget  -q https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
+wget  -q https://archive.apache.org/dist/spark/spark-3.0.2/spark-3.0.2-bin-hadoop2.7.tgz
 
 echo "Dowloading SBT"
-#wget -q https://github.com/sbt/sbt/releases/download/v1.2.0/sbt-1.2.0.tgz
-wget -q https://piccolo.link/sbt-1.2.0.tgz
+wget -q https://github.com/sbt/sbt/releases/download/v1.2.0/sbt-1.2.0.tgz
 
 # Download jdk binaries
 echo "Dowloading Java"
@@ -137,26 +141,25 @@ wget -q  https://downloads.lightbend.com/scala/2.12.2/scala-2.12.2.tgz
 # Download Hive binaries
 echo "Dowloading Hive"
 #wget  http://mirrors.estointernet.in/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
-wget -q http://apachemirror.wuchna.com/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz
-
+wget -q https://downloads.apache.org/hive/hive-2.3.9/apache-hive-2.3.9-bin.tar.gz
 
 # Download Pig binaries
 echo "Dowloading Pig"
 #wget -q http://www-us.apache.org/dist/pig/pig-0.16.0/pig-0.16.0.tar.gz
-wget -q http://apachemirror.wuchna.com/pig/pig-0.16.0/pig-0.16.0.tar.gz
+wget -q http://www-us.apache.org/dist/pig/pig-0.16.0/pig-0.16.0.tar.gz
 
 # Download Kafka binaries
 echo "Dowloading Kafka"
 #wget  https://archive.apache.org/dist/kafka/1.1.1/kafka_2.12-1.1.1.tgz
-wget -q https://archive.apache.org/dist/kafka/2.4.1/kafka_2.11-2.4.1.tgz
+wget -q https://archive.apache.org/dist/kafka/2.8.0/kafka_2.12-2.8.0.tgz
 
 # Download Apache Cassandra
 echo "Dowloading Cassandra"
-wget -q http://apachemirror.wuchna.com/cassandra/3.0.21/apache-cassandra-3.0.21-bin.tar.gz
+wget -q http://archive.apache.org/dist/cassandra/3.11.10/apache-cassandra-3.11.10-bin.tar.gz
 
 # Download MongoDB
 echo "Dowloading MongoDB"
-wget -q https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.9.tgz
+wget -q https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-4.2.13.tgz
 
 # Download MySQL JDBC Driver
 echo "Dowloading MySQL JDBC Driver"
@@ -166,7 +169,6 @@ wget -q https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1
 echo "Dowloading Sqoop"
 wget -q http://mirrors.estointernet.in/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
 
-
 # Download HBase
 echo "Dowloading HBase"
 wget -q https://downloads.apache.org/hbase/1.6.0/hbase-1.6.0-bin.tar.gz
@@ -174,16 +176,16 @@ wget -q https://downloads.apache.org/hbase/1.6.0/hbase-1.6.0-bin.tar.gz
 
 echo "Hadoop Extraction Started "
 # Extract hadoop binaries
-tar -xf hadoop-2.9.2.tar.gz
-mv hadoop-2.9.2 hadoop
-rm hadoop-2.9.2.tar.gz
+tar -xf hadoop-2.10.1.tar.gz
+mv hadoop-2.10.1 hadoop
+rm hadoop-2.10.1.tar.gz
 echo "Hadoop Extraction Completed "
 
 echo "Spark Extraction Started "
 # Extract the Spark  binaries
-tar -xf spark-2.4.5-bin-hadoop2.7.tgz
-mv spark-2.4.5-bin-hadoop2.7 spark
-rm spark-2.4.5-bin-hadoop2.7.tgz
+tar -xf spark-3.0.2-bin-hadoop2.7.tgz
+mv spark-3.0.2-bin-hadoop2.7 spark
+rm spark-3.0.2-bin-hadoop2.7.tgz
 echo "Spark Extraction Completed "
 
 echo "Java Extraction Started "
@@ -195,9 +197,9 @@ echo "Java Extraction Completed "
 
 echo "Hive Extraction Started "
 # Extract Hive binaries
-tar -xf apache-hive-2.3.7-bin.tar.gz
-mv apache-hive-2.3.7-bin hive
-rm  apache-hive-2.3.7-bin.tar.gz
+tar -xf apache-hive-2.3.9-bin.tar.gz
+mv apache-hive-2.3.9-bin hive
+rm  apache-hive-2.3.9-bin.tar.gz
 echo "Hive Extraction Completed "
 
 echo "Pig Extraction Started "
@@ -209,7 +211,7 @@ echo "Pig Extraction Completed "
 
 echo "Scala Extraction Started "
 # Extract Scala binaries
- tar -xf scala-2.12.2.tgz
+tar -xf scala-2.12.2.tgz
  mv scala-2.12.2 scala
  rm scala-2.12.2.tgz
 echo "Scala Extraction Completed "
@@ -222,23 +224,23 @@ echo "SBT Extraction Completed "
 
 echo "Kafka Extraction Started "
 #Extract Kafka 
-tar xf kafka_2.11-2.4.1.tgz
-mv kafka_2.11-2.4.1 kafka
-rm kafka_2.11-2.4.1.tgz
+tar xf kafka_2.12-2.8.0.tgz
+mv kafka_2.12-2.8.0 kafka
+rm kafka_2.12-2.8.0.tgz
 echo "Kafka Extraction Completed "
 
 echo "Cassandra Extraction Started "
 #Extract Cassandra 
-tar xf apache-cassandra-3.0.21-bin.tar.gz 
-mv apache-cassandra-3.0.21 cassandra
-rm apache-cassandra-3.0.21-bin.tar.gz
+tar xf apache-cassandra-3.11.10-bin.tar.gz
+mv apache-cassandra-3.11.10 cassandra
+rm apache-cassandra-3.11.10-bin.tar.gz
 echo "Cassandra Extraction Completed "
 
 echo "MongoDB Extraction Started "
 #Extract MongoDB 
-tar xf mongodb-linux-x86_64-4.0.9.tgz
-mv mongodb-linux-x86_64-4.0.9 mongodb
-rm mongodb-linux-x86_64-4.0.9.tgz
+tar xf mongodb-linux-x86_64-ubuntu1604-4.2.13.tgz
+mv mongodb-linux-x86_64-ubuntu1604-4.2.13 mongodb
+rm mongodb-linux-x86_64-ubuntu1604-4.2.13.tgz
 echo "MongoDB Extraction Completed "
 
 echo "MySQL JDBC Extraction Started "
@@ -296,7 +298,7 @@ echo 'export PATH=$PATH:$SQOOP_HOME/bin' >> /home/$USER_NAME/.bashrc
 # set env variables for Hbase
 echo 'export HBASE_HOME=/app/bigdata/hbase'>> /home/$USER_NAME/.bashrc
 echo 'export PATH=$PATH:$HBASE_HOME/bin'>> /home/$USER_NAME/.bashrc
-echo 'export PYSPARK_PYTHON=python3.6'>> /home/$USER_NAME/.bashrc
+echo 'export PYSPARK_PYTHON=python3.7'>> /home/$USER_NAME/.bashrc
 
 source /home/$USER_NAME/.bashrc
 
@@ -335,7 +337,7 @@ echo " ------------- Copy Spark configuraton files -----------------"
 cp $unzipped_dir/slaves /app/bigdata/spark/conf/
 cp $unzipped_dir/spark-env.sh /app/bigdata/spark/conf/
 cp $unzipped_dir/spark-defaults.conf /app/bigdata/spark/conf/
-cp $unzipped_dir/hive-site.xml /app/bigdata/spark/conf/
+# cp $unzipped_dir/hive-site.xml /app/bigdata/spark/conf/
 echo " ------------- Copy Spark configuraton files Done-----------------"
 
 # copy Hive configuraton file into Sqoop conf directory
