@@ -1,5 +1,7 @@
-##  Azure Resource Manager(ARM) Template & Automation Script for Single user environment
+## Azure Resource Manager(ARM) Template and Automation Script
+## to setup Single Node Cluster environment in Microsoft Azure
 ###  Single Node _Hadoop/Spark/HBase/Kafka/Cassandra/MongoDB_ Cluster with Windows VM Gateway
+#### This environment should be used by Single User only 
 
 Template & Automation Script for creating single node _hadoop/spark/kafka/cassanda/mongodb_ cluster in Azure
 
