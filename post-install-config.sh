@@ -1,4 +1,5 @@
 echo "#---------- Post installation configuration started --------------# "
+
 rm -rf $HOME/.ssh
 mkdir $HOME/.ssh
 ssh-keygen -q -t rsa -N '' -f $HOME/.ssh/id_rsa && cat $HOME/.ssh/id_rsa.pub > $HOME/.ssh/authorized_keys
