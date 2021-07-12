@@ -57,19 +57,23 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
     ##### $ start-dfs.sh
     ##### $ start-yarn.sh
 
-9. Start Spark Services in Linux VM
+9. Create Hadoop Home Directory
+   ##### $ hdfs dfs -mkdir -p /user/azureuser
+   ##### $ hdfs dfs -ls
+   
+10. Start Spark Services in Linux VM
     ##### $ start-master.sh
     ##### $ start-slaves.sh
 
-10. Start Spark(Scala/Java) Shell  in Linux VM
+11. Start Spark(Scala/Java) Shell  in Linux VM
 
     ##### $ spark-shell --master spark://localhost:7077
 
-11. Start Spark(Python) Shell  in Linux VM
+12. Start Spark(Python) Shell  in Linux VM
 
     ##### $ pyspark --master spark://localhost:7077
 
-12. Start Hive  in Linux VM
+13. Start Hive  in Linux VM
 
     ##### $ hive
 
@@ -77,6 +81,11 @@ Template & Automation Script for creating single node _hadoop/spark/kafka/cassan
 #### Installation directory in Linux VM - /app/bigdata
 #### Default user name for Windows & Linux VM - azureuser
 #### Default password for Windows & Linux VM - Password@1234
+
+##### _Before Starting MongoDB Service, install the library shown below_
+#### $ sudo apt-get -y install libcurl3
+
+
 
 :+1: **_Happy Clustering in Azure_** :shipit:
 
