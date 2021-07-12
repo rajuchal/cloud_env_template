@@ -10,3 +10,4 @@ New-AzResourceGroupDeployment `
 	-TemplateFile $templateFile `
 	-TemplateParameterFile $parameterFile `
 	-Verbose
+
