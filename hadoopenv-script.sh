@@ -3,7 +3,7 @@ adminuser_name=$1
 sudo apt-get install -y update 2>/dev/null
 sudo apt-get install -y unzip
 ##==========================================================================
-
+##==========================================================================
 # Passwordless ssh login for root
 echo "# Passwordless ssh login for root-----------"
 pwd
